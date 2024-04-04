@@ -1,0 +1,50 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+   
+  </head>
+  <body>
+
+    
+    
+    <section id="selling-products" class="product-store bg-light-grey padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Product Details</h2>
+        </div>
+        
+        <div class="tab-content">
+          <div data-tab-content class="active">
+            <div class="row d-flex flex-wrap">
+              
+             
+              <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                <div class="image-holder">
+                  <a href="{% url 'seller-product-details' pk=product.pk %}"><img src="{{product.product_image.url}}" alt="Books" class="product-image" style="width:350px;height:350px;"></a>
+                </div>
+
+                <div class="product-detail">
+                  <h3 class="product-title">
+                    <a href="single-product.html">Name : {{product.product_name}}</a>
+                  </h3>
+                  <div class="item-price text-primary">Price : Rs. {{product.product_price}}</div>
+                  <h3 class="product-title">
+                    <a href="single-product.html">Details : {{product.product_desc}}</a>
+                  </h3>
+                  <div class="item-price text-primary">Category :  {{product.product_category}}
+                </div>
+                <a href="{% url 'seller-product-edit' pk=product.pk %}"><input type="button" value="EDIT" class="btn btn-primary"></a>
+                <a href="{% url 'seller-product-delete' pk=product.pk %}"><input type="button" value="DELETE"></a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+{% endblock %}

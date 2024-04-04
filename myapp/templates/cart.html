@@ -1,0 +1,92 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+   <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section id="selling-products" class="product-store bg-light-grey padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Cart</h2>
+        </div>
+        <ul class="tabs list-unstyled">
+          <li class="tab">All</li>
+          <li class="tab">Men</li>
+          <li class="tab">Women</li>
+          <li class="tab">Kids</li>
+        </ul>
+        <div class="tab-content">
+          <div data-tab-content class="active">
+            <div class="row d-flex flex-wrap">
+              
+              {% for i in carts %}
+              <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                <div class="image-holder">
+                  <a href="{% url 'product-details' pk=i.product.pk %}"><img src="{{i.product.product_image.url}}" alt="Books" class="product-image" style="width:350px;height:350px;"></a>
+                </div>
+                <div class="product-detail">
+                  <h3 class="product-title">
+                    <a href="single-product.html">{{i.product.product_name}}</a>
+                  </h3>
+                  <div class="item-price text-primary">Price : Rs. {{i.product.product_price}}</div>
+                  <div class="item-price text-primary">
+                    <form method="post" action="{% url 'change-qty' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="cid" value="{{i.pk}}">
+                      Qty : <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();">
+                    </form>
+                  </div>
+                  <div class="item-price text-primary">Total : Rs. {{i.total_price}}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <h1>Net Price : {{net_price}}</h1>
+          <form method="post">
+            <input type="hidden" id="net_price" name="amount" value="{{net_price}}">
+            <button type="button" class="btn btn-lg btn-primary" id="checkout-button">Checkout</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+
+var stripe = Stripe('pk_test_51MshH6SJuXwPfjjrrgxJ5tubbOgYAhRrqNcd4RDUSq1peWpIMZrjhIiTncSUWO9u6byeDf4KxdZPkFD4hU55mVOg00aRL5RT8x');
+var checkoutButton = document.getElementById('checkout-button');
+
+checkoutButton.addEventListener('click', function() { 
+ fetch('/create-checkout-session/', {
+ method: 'POST',
+    headers:{
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+
+    },
+    body: JSON.stringify({'post_data':'{{net_price}}'})
+ })
+ .then(function(response) {
+ return response.json();
+ })
+ .then(function(session) {
+ return stripe.redirectToCheckout({ sessionId: session.id });
+ })
+ .then(function(result) {
+ // If `redirectToCheckout` fails due to a browser or network
+ // error, you should display the localized error message to your
+ // customer using `error.message`.
+ if (result.error) {
+ alert(result.error.message);
+ }
+ })
+ .catch(function(error) {
+ console.error('Error:', error);
+ });
+ });
+ </script>
+  </body>
+</html>
+{% endblock %}

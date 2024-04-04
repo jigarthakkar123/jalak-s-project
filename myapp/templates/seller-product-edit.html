@@ -1,0 +1,188 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+    
+  </head>
+  <body>
+
+   
+    <section class="site-banner jarallax padding-large" style="background: url({% static 'images/hero-image.jpg' %}) no-repeat; background-position: top;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="page-title">Edit Product</h1>
+            <div class="breadcrumbs">
+              <span class="item">
+                <a href="/">Home /</a>
+              </span>
+              <span class="item">Edit Product</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-information padding-large">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div class="contact-information">
+              <div class="section-header">
+                <h2 class="section-title">Edit Product</h2>
+              </div>
+              {% if msg %}
+                <b style="color: blue;">{{msg}}</b>
+              {% endif %}
+              <form name="contactform" action="{% url 'seller-product-edit' pk=product.pk %}" method="post" class="contact-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-item">
+                  {% if product.product_category == "Men" %}
+                    <select class="u-full-width bg-light" name="product_category">
+                      <option>---Select Category---</option>
+                      <option value="Men" selected>Men</option>
+                      <option value="Women">Women</option>
+                      <option value="Kids">Kids</option>
+                  </select>
+                  {% elif product.product_category == "Women" %}
+                    <select class="u-full-width bg-light" name="product_category">
+                      <option>---Select Category---</option>
+                      <option value="Men">Men</option>
+                      <option value="Women" selected>Women</option>
+                      <option value="Kids">Kids</option>
+                  </select>
+                  {% elif product.product_category == "Kids" %}
+                    <select class="u-full-width bg-light" name="product_category">
+                      <option>---Select Category---</option>
+                      <option value="Men">Men</option>
+                      <option value="Women">Women</option>
+                      <option value="Kids" selected>Kids</option>
+                  </select>
+                  {% endif %}
+                  
+                  <input type="text" minlength="2" name="product_name" value="{{product.product_name}}" class="u-full-width bg-light" required>
+                  <input type="text" minlength="2" name="product_price" value="{{product.product_price}}" class="u-full-width bg-light" required>
+                  
+                  <textarea class="u-full-width bg-light" name="product_desc" style="height: 180px;" required>{{product.product_desc}}</textarea>
+                  <img src="{{product.product_image.url}}" style="width:100px;height:100px;">
+                  <input type="file" name="product_image" class="u-full-width bg-light">
+                </div>
+                
+                <button type="submit" name="submit" class="btn btn-dark btn-full btn-medium">Update Product</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="brand-collection" class="padding-medium bg-light-grey">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between">
+          <img src="{% static 'images/brand1.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand2.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand3.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand4.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand5.png' %}" alt="phone" class="brand-image">
+        </div>
+      </div>
+    </section>
+
+    <section id="instagram" class="padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Follow our instagram</h2>
+        </div>
+        <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
+        </p>
+        <div class="row d-flex flex-wrap justify-content-between">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image1.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image2.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image3.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image4.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image5.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image6.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+        </div>          
+      </div>
+    </section>
+
+    <section id="shipping-information">
+      <hr>
+      <div class="container">
+        <div class="row d-flex flex-wrap align-items-center justify-content-between">
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-truck"></i>
+              <h4 class="block-title">
+                <strong>Free shipping</strong> Over $200
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-return"></i>
+              <h4 class="block-title">
+                <strong>Money back</strong> Return within 7 days
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-tags1"></i>
+              <h4 class="block-title">
+                <strong>Buy 4 get 5th</strong> 50% off
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-help_outline"></i>
+              <h4 class="block-title">
+                <strong>Any questions?</strong> experts are ready
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </section>
+
+  </body>
+</html>
+{% endblock %}

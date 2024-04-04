@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+   <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section id="selling-products" class="product-store bg-light-grey padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Orders</h2>
+        </div>
+        <ul class="tabs list-unstyled">
+          <li class="tab">All</li>
+          <li class="tab">Men</li>
+          <li class="tab">Women</li>
+          <li class="tab">Kids</li>
+        </ul>
+        <div class="tab-content">
+          <div data-tab-content class="active">
+            <div class="row d-flex flex-wrap">
+              
+              {% for i in carts %}
+              <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                <div class="image-holder">
+                  <a href="{% url 'product-details' pk=i.product.pk %}"><img src="{{i.product.product_image.url}}" alt="Books" class="product-image" style="width:350px;height:350px;"></a>
+                </div>
+                <div class="product-detail">
+                  <h3 class="product-title">
+                    <a href="single-product.html">{{i.product.product_name}}</a>
+                  </h3>
+                  <div class="item-price text-primary">Price : Rs. {{i.product.product_price}}</div>
+                  <div class="item-price text-primary">
+                    <form method="post" action="{% url 'change-qty' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="cid" value="{{i.pk}}">
+                      Qty : <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" readonly>
+                    </form>
+                  </div>
+                  <div class="item-price text-primary">Total : Rs. {{i.total_price}}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <h1>Net Price : {{net_price}}</h1>
+          
+        </div>
+      </div>
+    </section>
+    
+  </body>
+</html>
+{% endblock %}

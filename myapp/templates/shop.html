@@ -1,0 +1,51 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+   
+  </head>
+  <body>
+
+    
+    
+    <section id="selling-products" class="product-store bg-light-grey padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Products</h2>
+        </div>
+        <ul class="tabs list-unstyled">
+          <li class="tab">All</li>
+          <li class="tab">Men</li>
+          <li class="tab">Women</li>
+          <li class="tab">Kids</li>
+          
+        </ul>
+        <div class="tab-content">
+          <div data-tab-content class="active">
+            <div class="row d-flex flex-wrap">
+              
+              {% for i in products %}
+              <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                <div class="image-holder">
+                  <a href="{% url 'product-details' pk=i.pk %}"><img src="{{i.product_image.url}}" alt="Books" class="product-image" style="width:350px;height:350px;"></a>
+                </div>
+
+                <div class="product-detail">
+                  <h3 class="product-title">
+                    <a href="single-product.html">{{i.product_name}}</a>
+                  </h3>
+                  <div class="item-price text-primary">Rs. {{i.product_price}}</div>
+                  
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+{% endblock %}

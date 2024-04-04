@@ -1,0 +1,167 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ultras - Clothing Store eCommerce Store HTML Website Template</title>
+    
+  </head>
+  <body>
+
+   
+    <section class="site-banner jarallax padding-large" style="background: url({% static 'images/hero-image.jpg' %}) no-repeat; background-position: top;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="page-title">Profile</h1>
+            <div class="breadcrumbs">
+              <span class="item">
+                <a href="/">Home /</a>
+              </span>
+              <span class="item">Profile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-information padding-large">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div class="contact-information">
+              <div class="section-header">
+                <h2 class="section-title">User Profile</h2>
+              </div>
+              {% if msg %}
+                <b style="color: blue;">{{msg}}</b>
+              {% endif %}
+              <form name="contactform" action="{% url 'profile' %}" method="post" class="contact-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-item">
+                  <input type="text" minlength="2" name="usertype" value="{{user.usertype}}" class="u-full-width bg-light" readonly>
+                  <input type="text" minlength="2" name="fname" value="{{user.fname}}" class="u-full-width bg-light">
+                  <input type="text" minlength="2" name="lname" value="{{user.lname}}" class="u-full-width bg-light">
+                  <input type="email" name="email" value="{{user.email}}" class="u-full-width bg-light" readonly>
+                  <input type="text" minlength="2" name="mobile" value="{{user.mobile}}" class="u-full-width bg-light">
+                  <textarea class="u-full-width bg-light" name="address" style="height: 180px;">{{user.address}}</textarea>
+                  <img src="{{user.profile_picture.url}}" style="width:100px;height: 100px;">
+                  <input type="file" name="profile_picture" class="u-full-width bg-light">
+                </div>
+                
+                <button type="submit" name="submit" class="btn btn-dark btn-full btn-medium">Update Profile</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="brand-collection" class="padding-medium bg-light-grey">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between">
+          <img src="{% static 'images/brand1.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand2.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand3.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand4.png' %}" alt="phone" class="brand-image">
+          <img src="{% static 'images/brand5.png' %}" alt="phone" class="brand-image">
+        </div>
+      </div>
+    </section>
+
+    <section id="instagram" class="padding-large">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Follow our instagram</h2>
+        </div>
+        <p>Our official Instagram account <a href="#">@ultras</a> or <a href="#">#ultras_clothing</a>
+        </p>
+        <div class="row d-flex flex-wrap justify-content-between">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image1.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image2.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image3.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image4.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image5.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <figure class="zoom-effect">
+              <img src="{% static 'images/insta-image6.jpg' %}" alt="instagram" class="insta-image">
+              <i class="icon icon-instagram"></i>
+            </figure>
+          </div>
+        </div>          
+      </div>
+    </section>
+
+    <section id="shipping-information">
+      <hr>
+      <div class="container">
+        <div class="row d-flex flex-wrap align-items-center justify-content-between">
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-truck"></i>
+              <h4 class="block-title">
+                <strong>Free shipping</strong> Over $200
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-return"></i>
+              <h4 class="block-title">
+                <strong>Money back</strong> Return within 7 days
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-tags1"></i>
+              <h4 class="block-title">
+                <strong>Buy 4 get 5th</strong> 50% off
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="icon-box">
+              <i class="icon icon-help_outline"></i>
+              <h4 class="block-title">
+                <strong>Any questions?</strong> experts are ready
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </section>
+
+  </body>
+</html>
+{% endblock %}
